@@ -1,4 +1,6 @@
-<include a CircleCI status badge, here>
+# Operationalize a Machine Learning Microservice API
+
+[![CircleCI](https://circleci.com/gh/giacomolanciano/udacity-operationalize-ml-microservice.svg?style=svg)](https://circleci.com/gh/giacomolanciano/udacity-operationalize-ml-microservice)
 
 ## Project Overview
 
