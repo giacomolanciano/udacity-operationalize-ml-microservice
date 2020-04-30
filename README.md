@@ -37,13 +37,22 @@ You can find a detailed [project rubric, here](https://review.udacity.com/#!/rub
 ## Setup the Environment
 
 * Create a virtualenv and activate it
+
+  ```bash
+  python -m venv .venv
+  source .venv/bin/activate
+  ```
+
 * Run `make install` to install the necessary dependencies
 
 ### Running `app.py`
 
 1. Standalone:  `python app.py`
 2. Run in Docker:  `./run_docker.sh`
-3. Run in Kubernetes:  `./run_kubernetes.sh`
+3. Run in Kubernetes:  `./run_kubernetes.sh` (**NOTE:** requires uploading the container to Docker Hub via
+   `./upload_docker.sh`)
+4. Run in Kubernetes (deployment):  `./run_kubernetes_deployment.sh` (**NOTE:** requires uploading the container to
+   Docker Hub via `./upload_docker.sh`)
 
 ### Kubernetes Steps
 
@@ -51,3 +60,19 @@ You can find a detailed [project rubric, here](https://review.udacity.com/#!/rub
 * Setup and Configure Kubernetes locally
 * Create Flask app in Container
 * Run via kubectl
+
+### Linting
+
+Run `make lint` (or `make lint-local` if do not have `hadolint` installed in your local environment) to lint app code
+and `Dockerfile`. Linting will be also automatically run by CircleCI.
+
+### Unit Tests
+
+Run `make test` to check whether the app is behaving as expected. Tests will be also automatically run by CircleCI.
+
+### Cleaning up
+
+* If the app has been launched with `./run_docker.sh`, no action is required (the container will be automatically
+  deleted).
+* If the app has been launched with `./run_kubernetes.sh`, run `kubectl delete pod flasksklearndemo`
+* If the app has been launched with `./run_kubernetes_deployment.sh`, run `./clean_kubernetes_deployment.sh`
