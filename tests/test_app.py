@@ -9,11 +9,15 @@ import app
 
 @pytest.fixture()
 def client():
-    app_client = app.app.test_client()
-    yield app_client
+    """Generic Flask application fixture"""
+
+    app.app.testing = True
+    return app.app.test_client()
 
 
 def test_predict(client):
+    """Test route /predict"""
+
     request_payload = {
         "CHAS": {
             "0": 0
@@ -35,10 +39,13 @@ def test_predict(client):
         }
     }
 
-    response_json = client.post("/predict", json=request_payload)
+    response = client.post("/predict", json=request_payload)
+
+    # check response status code is 200
+    assert response.status_code == 200
 
     # check response is well-formed
-    response_data = json.loads(response_json.data)
+    response_data = json.loads(response.data)
     assert "prediction" in response_data
 
     # check prediction is a list of values
