@@ -28,4 +28,11 @@ lint:
 	# This should be run from inside a virtualenv
 	pylint --disable=R,C,W1202,W1203 app.py
 
+lint-local:
+	# This is linter for Dockerfiles (running on Docker container to avoid hadolint installation)
+	docker run --rm -i hadolint/hadolint < Dockerfile
+	# This is a linter for Python source code linter: https://www.pylint.org/
+	# This should be run from inside a virtualenv
+	pylint --disable=R,C,W1202,W1203 app.py
+
 all: install lint test
